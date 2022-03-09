@@ -1,0 +1,106 @@
+﻿@model Afiliados
+
+@{
+    ViewData["Title"] = "ActualizarAfiliado";
+}
+
+@{
+    List<Planes> Planes = ViewData["Planes"] as List<Planes>;
+    List<Estatus> Estatus = ViewData["Estatus"] as List<Estatus>;
+}
+
+<section class="pt-3">
+    <header>
+        <h1 class="text-center">
+            ¡Actualizar el afiliado: <span class="bg-primary font-weight-bold text-white p-2">@Model.Nombres</span>
+        </h1>
+    </header>
+
+    <form action="ActualizarAfiliado" method="post">
+        <input type="hidden" value="@Model.Id" asp-for="Id" />
+
+        <div class="mt-2">
+            <label asp-for="Nombres">Nombres:</label>
+            <input type="text" value="@Model.Nombres" class="form-control" asp-for="Nombres">
+        </div>
+
+        <div class="mt-2">
+            <label asp-for="Apellidos">Apellidos:</label>
+            <input type="text" class="form-control" asp-for="Apellidos" value="@Model.Apellidos" required>
+        </div>
+
+        <div class="mt-2">
+            <label asp-for="Fecha_Nacimiento">Fecha de Nacimiento:</label>
+            <input type="date" class="form-control" asp-for="Fecha_Nacimiento"
+             value="@Model.Fecha_Nacimiento.ToString("yyyy-MM-dd")" required>
+        </div>
+
+        <br />
+        <div class="mt-2">
+            <label asp-for="Sexo">Sexo:</label>
+
+            <select asp-for="Sexo" class="form-select w-25" required>
+                <option selected value="m">Hombre</option>
+                <option value="f">Mujer</option>
+            </select>
+        </div>
+
+        <div class="mt-2">
+            <label asp-for="Cedula">Cedula:</label>
+            <input type="number" class="form-control" asp-for="Cedula" value="@Model.Cedula" required>
+        </div>
+
+        <div class="mt-2">
+            <label asp-for="Numero_Seguridad_Social">Numero de Seguridad Social:</label>
+            <input type="number" class="form-control" asp-for="Numero_Seguridad_Social" value="@Model.Numero_Seguridad_Social" required>
+        </div>
+
+        <div class="mt-2">
+            <label asp-for="Monto_Consumido">Monto Consumido:</label>
+            <input type="number" class="form-control" asp-for="Monto_Consumido" value="@Model.Monto_Consumido" required>
+        </div>
+
+        <br />
+
+        <div class="mt-2">
+            <label asp-for="Id_Estatus">Estatus:</label>
+            <select asp-for="Id_Estatus" class="form-select w-25">
+                @foreach (Estatus estatus in Estatus)
+                {
+                    if (Model.Id_Estatus == estatus.Id)
+                    {
+                        <option selected value="@estatus.Id">@estatus.Estatus_Nombre</option>
+                    }
+                    else
+                    {
+                        <option value="@estatus.Id">@estatus.Estatus_Nombre</option>
+                    }
+                }
+            </select>
+        </div>
+        <br />
+
+        <div class="mt-2">
+            <label asp-for="Id_Plan">Plan:</label>
+            <select asp-for="Id_Plan" class="form-select w-25">
+                @foreach (Planes plan in Planes)
+                {
+                    if (Model.Id_Plan == plan.Id)
+                    {
+                        <option selected value="@plan.Id">@plan.Nombre</option>
+                    }
+                    else
+                    {
+                        <option value="@plan.Id">@plan.Nombre</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <button class="d-block m-auto btn btn-success w-50 mt-1" type="submit">
+            Actualizar Afiliado
+        </button>
+    </form>
+
+</section>
+

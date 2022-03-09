@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "ActualizarMontoConsumido";
+}
+
+<section class="pt-5">
+    <header>
+        <h1 class="text-center">Actualizar monto Consumido Afiliado</h1>
+    </header>
+
+
+    <form action="ActualizarMontoConsumido" method="post">
+        <div class="mt-2">
+            <label name="afiliadoId">Id Afiliado:</label>
+            <input type="number" class="form-control" name="afiliadoId" required>
+        </div>
+
+        <div class="mt-2 mb-3">
+            <label name="montoSumar">Monto a sumar:</label>
+            <input type="number" class="form-control" name="montoSumar" required>
+        </div>
+
+        <button class="d-block m-auto btn btn-success w-50" type="submit">
+            Actualizar Monto
+        </button>
+    </form>
+
+
+</section>

@@ -1,0 +1,74 @@
+﻿@model List<Planes>
+
+
+@{
+    List<Estatus> Estatus = ViewData["Estatus"] as List<Estatus>;
+}
+
+
+<section class="pt-5">
+    <header>
+        <h1 class="text-center">Mantenimiento Planes</h1>
+
+        <div class="d-flex justify-content-end">
+            <a class="nav-link btn btn-primary text-white w-25" asp-area="" asp-controller="Planes" asp-action="CrearPlan">
+                Crear Plan
+            </a>
+        </div>
+    </header>
+
+    <table class="table table-dark mt-4 pt-2">
+        <thead>
+            <tr>
+                <td>Id</td>
+                <td>Nombre</td>
+                <td>Monto de Cobertura</td>
+                <td>Fecha de Registro</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (Planes plan in Model)
+            {
+            <tr>
+                <td>@plan.Id</td>
+                <td>@plan.Nombre</td>
+                <td>@plan.Monto_Cobertura RD$</td>
+                <td>@plan.Fecha_Registro.ToString("yyyy-MM-dd")</td>
+
+
+                <td><a href="~/Planes/ActualizarPlan/?idPlan=@plan.Id" class="text-white btn-success p-1">Actualizar</a></td>
+                <td>
+                    @if (plan.Id_Estatus == 1)
+                    {
+                        <a href="~/Planes/SwitchActivarPlan?idPlan=@plan.Id" class="text-white btn-danger p-1">
+                            Inactivar
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="~/Planes/SwitchActivarPlan?idPlan=@plan.Id" class="text-white btn-success p-1">
+                            Activar
+                        </a>
+                    }
+                </td>
+
+                <td>
+                    <a href="~/Planes/VerDetallePlan?idPlan=@plan.Id" class="text-white btn-primary p-1">
+                        Detalle
+                    </a>
+                </td>
+
+            </tr>
+            }
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+

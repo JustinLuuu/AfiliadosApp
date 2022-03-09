@@ -1,0 +1,93 @@
+﻿@model List<Afiliados>
+
+@{
+    ViewData["Title"] = "VerDetallePlan";
+}
+
+@{
+    List<Planes> Planes = ViewData["Planes"] as List<Planes>;
+    List<Estatus> Estatus = ViewData["Estatus"] as List<Estatus>;
+}
+
+<section class="pt-5">
+    <header>
+        <h1 class="text-center">
+            Afiliados con plan : <span class="bg-primary font-weight-bold text-white p-2">@ViewBag.PlanNombre</span>
+        </h1>
+    </header>
+
+    @if (Model.Count > 0)
+    {
+        <table class="table table-dark mt-4 pt-2">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Nombre </td>
+                    <td>Apellido</td>
+                    <td>Fecha de Nacimiento</td>
+                    <td>Sexo</td>
+                    <td>Cedula</td>
+                    <td>Numero de Seguridad Social</td>
+                    <td>Fecha de Registro</td>
+                    <td>Monto Consumido</td>
+                    <td>Monto Cobertura</td>
+                    <td>Monto Restante</td>
+                    <td>Estatus</td>
+                    <td>Plan</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (Afiliados afiliado in Model)
+                {
+                    <tr>
+                        <td>@afiliado.Id</td>
+                        <td>@afiliado.Nombres</td>
+                        <td>@afiliado.Apellidos</td>
+                        <td>@afiliado.Fecha_Nacimiento.ToString("yyyy-MM-dd")</td>
+                        <td>@afiliado.Sexo.ToString().ToUpper()</td>
+                        <td>@afiliado.Cedula</td>
+                        <td>@afiliado.Numero_Seguridad_Social</td>
+                        <td>@afiliado.Fecha_Registro.ToString("yyyy-MM-dd")</td>
+                        <td>$@afiliado.Monto_Consumido RD$</td>
+                        <td>@Planes.Find(p => p.Id == afiliado.Id_Plan).Monto_Cobertura RD$</td>
+                        <td>@(Planes.Find(p => p.Id == afiliado.Id_Plan).Monto_Cobertura - afiliado.Monto_Consumido )RD$ </td>
+
+                        <td>@Estatus.Find(e => e.Id == afiliado.Id_Estatus).Estatus_Nombre</td>
+                        <td>@Planes.Find(x => x.Id == afiliado.Id_Plan).Nombre</td>
+
+                        <td>
+                            <a href="~/Afiliados/ActualizarAfiliado?idAfiliado=@afiliado.Id"
+                               class="text-white btn-success p-1">
+                                Actualizar
+                            </a>
+                        </td>
+
+                        <td>
+                            @if (afiliado.Id_Estatus == 1)
+                            {
+                                <a href="~/Afiliados/SwitchActivarAfiliado?idAfiliado=@afiliado.Id" class="text-white btn-danger p-1">
+                                    Inactivar
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="~/Afiliados/SwitchActivarAfiliado?idAfiliado=@afiliado.Id" class="text-white btn-success p-1">
+                                    Activar
+                                </a>
+                            }
+                        </td>                      
+                    </tr>
+                }
+            </tbody>
+        </table>
+    } else
+    {
+        <h2>¡No hay afiliados aun con ese plan!</h2>
+    }
+
+
+</section>
