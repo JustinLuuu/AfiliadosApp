@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "X1My+WasuQQ39pZYpUZ4R7QTWUY+DR/MWmr0rV0NOW4D9Q0Al0xZ2GVfiQ42mkTa58K7MSfdulTL/vDJGPOmTA==",
+  "dgSpecHash": "bLAZpT1aQjDQsrfYHYb3/YDyezLkkJ5ITwIh2cy/TP+bpmSK52xMYi3SGpfW++6iwsaSgHMlBA69NPYJ8yVSCQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jminaya\\Desktop\\ARS_Prueba\\Prueba_Tecnica_ARS\\Prueba_Tecnica_ARS\\Prueba_Tecnica_ARS.csproj",
+  "projectFilePath": "C:\\Users\\jminaya\\Desktop\\New folder (2)\\AfiliadosApp\\Prueba_Tecnica_ARS\\Prueba_Tecnica_ARS.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jminaya\\.nuget\\packages\\azure.core\\1.6.0\\azure.core.1.6.0.nupkg.sha512",
     "C:\\Users\\jminaya\\.nuget\\packages\\azure.identity\\1.3.0\\azure.identity.1.3.0.nupkg.sha512",

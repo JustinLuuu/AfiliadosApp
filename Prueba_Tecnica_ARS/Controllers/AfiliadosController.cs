@@ -81,6 +81,36 @@ namespace Prueba_Tecnica_ARS.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public IActionResult ConsultaMasivaAfiliados()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ConsultaMasivaAfiliados (string nombres, string apellidos, string cedula)
+        {
+            CargarRecursos();
+            var afiliadosListadoFiltrar = afiliadosData.ObtenerListado() as List<Afiliados>;
+
+            if(nombres == string.Empty)
+            {
+                afiliadosListadoFiltrar = afiliadosListadoFiltrar.Where(x => x.Nombres == nombres).ToList();
+            }
+
+            if (apellidos == string.Empty)
+            {
+                afiliadosListadoFiltrar = afiliadosListadoFiltrar.Where(x => x.Apellidos == apellidos).ToList();
+            }
+
+            if (cedula == string.Empty)
+            {
+                afiliadosListadoFiltrar = afiliadosListadoFiltrar.Where(x => x.Cedula == cedula).ToList();
+            }
+
+            return View(afiliadosListadoFiltrar);
+        }
+
         private void CargarRecursos()
         {
             ViewData["Planes"] = planesData.ObtenerListado();

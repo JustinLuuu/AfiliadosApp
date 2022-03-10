@@ -7512,11 +7512,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jminaya\\Desktop\\ARS_Prueba\\Prueba_Tecnica_ARS\\Prueba_Tecnica_ARS\\Prueba_Tecnica_ARS.csproj",
+      "projectUniqueName": "C:\\Users\\jminaya\\Desktop\\New folder (2)\\AfiliadosApp\\Prueba_Tecnica_ARS\\Prueba_Tecnica_ARS.csproj",
       "projectName": "Prueba_Tecnica_ARS",
-      "projectPath": "C:\\Users\\jminaya\\Desktop\\ARS_Prueba\\Prueba_Tecnica_ARS\\Prueba_Tecnica_ARS\\Prueba_Tecnica_ARS.csproj",
+      "projectPath": "C:\\Users\\jminaya\\Desktop\\New folder (2)\\AfiliadosApp\\Prueba_Tecnica_ARS\\Prueba_Tecnica_ARS.csproj",
       "packagesPath": "C:\\Users\\jminaya\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jminaya\\Desktop\\ARS_Prueba\\Prueba_Tecnica_ARS\\Prueba_Tecnica_ARS\\obj\\",
+      "outputPath": "C:\\Users\\jminaya\\Desktop\\New folder (2)\\AfiliadosApp\\Prueba_Tecnica_ARS\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
