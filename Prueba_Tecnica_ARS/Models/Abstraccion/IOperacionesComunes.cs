@@ -9,6 +9,5 @@ namespace Prueba_Tecnica_ARS.Models.Abstraccion
     {
         void Insertar();
         void Actualizar();
-        void SwitchActivar(int id);
     }
 }

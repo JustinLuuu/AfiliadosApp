@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Prueba_Tecnica_ARS.Models;
+using Prueba_Tecnica_ARS.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,9 +60,13 @@ namespace Prueba_Tecnica_ARS.Controllers
         }
 
         [HttpGet]
-        public IActionResult SwitchActivarAfiliado(int idAfiliado)
+        public IActionResult CambiarEstatusAfiliado(int idAfiliado)
         {
-            afiliadosData.SwitchActivar(idAfiliado);
+            var afiliado = afiliadosData.ObtenerAfiliadoPorId(idAfiliado);
+            afiliado.Id_Estatus = (afiliado.Id_Estatus == (int)ConstEstatus.Activo ?
+            (int)ConstEstatus.Inactivo : (int)ConstEstatus.Activo);
+
+            afiliado.Actualizar();
             return RedirectToAction("Index");
         }
 
@@ -75,9 +80,9 @@ namespace Prueba_Tecnica_ARS.Controllers
         [HttpPost]
         public IActionResult ActualizarMontoConsumido(int afiliadoId, decimal montoSumar)
         {
-            var afiliadoActualizar = afiliadosData.ObtenerAfiliadoPorId(afiliadoId);
-            afiliadoActualizar.Monto_Consumido += montoSumar;
-            afiliadoActualizar.Actualizar();
+            var afiliado = afiliadosData.ObtenerAfiliadoPorId(afiliadoId);
+            afiliado.Monto_Consumido += montoSumar;
+            afiliado.Actualizar();
             return RedirectToAction("Index");
         }
 
@@ -93,17 +98,17 @@ namespace Prueba_Tecnica_ARS.Controllers
             CargarRecursos();
             var afiliadosListadoFiltrar = afiliadosData.ObtenerListado() as List<Afiliados>;
 
-            if(nombres == string.Empty)
+            if(!String.IsNullOrEmpty(nombres))
             {
                 afiliadosListadoFiltrar = afiliadosListadoFiltrar.Where(x => x.Nombres == nombres).ToList();
             }
 
-            if (apellidos == string.Empty)
+            if (!String.IsNullOrEmpty(apellidos))
             {
                 afiliadosListadoFiltrar = afiliadosListadoFiltrar.Where(x => x.Apellidos == apellidos).ToList();
             }
 
-            if (cedula == string.Empty)
+            if (!String.IsNullOrEmpty(cedula))
             {
                 afiliadosListadoFiltrar = afiliadosListadoFiltrar.Where(x => x.Cedula == cedula).ToList();
             }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Prueba_Tecnica_ARS.Models;
+using Prueba_Tecnica_ARS.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +59,18 @@ namespace Prueba_Tecnica_ARS.Controllers
         }
 
         [HttpGet]
+        public IActionResult CambiarEstatusPlan(int idPlan)
+        {
+            var plan = planesData.ObtenerPlanPorId(idPlan);
+            plan.Id_Estatus = (plan.Id_Estatus == (int)ConstEstatus.Activo ?
+            (int)ConstEstatus.Inactivo : (int)ConstEstatus.Activo);
+
+            plan.Actualizar();
+            return RedirectToAction("Index");
+        }
+
+
+        [HttpGet]
         public IActionResult VerDetallePlan(int idPlan)
         {
             CargarRecursos();
@@ -65,14 +78,7 @@ namespace Prueba_Tecnica_ARS.Controllers
             ViewBag.PlanNombre = planesData.ObtenerPlanPorId(idPlan)?.Nombre;
             return View(listadoAfiliadosConPlan);
         }
-
-        [HttpGet]
-        public IActionResult SwitchActivarPlan(int idPlan)
-        {
-            planesData.SwitchActivar(idPlan);
-            return RedirectToAction("Index");
-        }
-
+        
         private void CargarRecursos()
         {
             ViewData["Planes"] = planesData.ObtenerListado();

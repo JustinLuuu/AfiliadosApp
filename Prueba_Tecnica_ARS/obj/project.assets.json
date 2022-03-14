@@ -7506,23 +7506,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jminaya\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\justi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jminaya\\Desktop\\New folder (2)\\AfiliadosApp\\Prueba_Tecnica_ARS\\Prueba_Tecnica_ARS.csproj",
+      "projectUniqueName": "C:\\Users\\justi\\OneDrive\\Escritorio\\Nueva carpeta\\AfiliadosApp\\Prueba_Tecnica_ARS\\Prueba_Tecnica_ARS.csproj",
       "projectName": "Prueba_Tecnica_ARS",
-      "projectPath": "C:\\Users\\jminaya\\Desktop\\New folder (2)\\AfiliadosApp\\Prueba_Tecnica_ARS\\Prueba_Tecnica_ARS.csproj",
-      "packagesPath": "C:\\Users\\jminaya\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jminaya\\Desktop\\New folder (2)\\AfiliadosApp\\Prueba_Tecnica_ARS\\obj\\",
+      "projectPath": "C:\\Users\\justi\\OneDrive\\Escritorio\\Nueva carpeta\\AfiliadosApp\\Prueba_Tecnica_ARS\\Prueba_Tecnica_ARS.csproj",
+      "packagesPath": "C:\\Users\\justi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\justi\\OneDrive\\Escritorio\\Nueva carpeta\\AfiliadosApp\\Prueba_Tecnica_ARS\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\jminaya\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\justi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7567,6 +7563,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[5.0.12, 5.0.12]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -7575,7 +7577,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

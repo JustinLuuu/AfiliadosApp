@@ -11,6 +11,7 @@ namespace Prueba_Tecnica_ARS.Models
     {
         public int Id { get; set; }
         public string Estatus_Nombre { get; set; }
+        public static int Activo { get; internal set; }
 
         public override IEnumerable<Entidades> ObtenerListado()
         {
@@ -18,54 +19,21 @@ namespace Prueba_Tecnica_ARS.Models
 
             try
             {
-                using (COMANDO = new SqlCommand("select * from Estatus", CONEXION))
-                {
-                    CONEXION.Open();
-                    LECTOR = COMANDO.ExecuteReader();
+                COMANDO = new SqlCommand("select * from Estatus", CONEXION);
+                CONEXION.Open();
+                LECTOR = COMANDO.ExecuteReader();
 
-                    while (LECTOR.Read())
-                    {                       
-                        estatusLista.Add(new Estatus
-                        {
-                            Id = int.Parse(LECTOR["Id"].ToString()),
-                            Estatus_Nombre = LECTOR["Estatus"].ToString(),
-                        });
-                    }
-                    CONEXION.Close();
-
-                    return estatusLista;
-                }
-            }
-            catch (SqlException e)
-            {
-                throw new Exception(e.Message);
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
-
-
-        public Estatus ObtenerEstatusPorId(int id)
-        {
-            try
-            {
-                using (COMANDO = new SqlCommand("select * from Estatus where Id=@id", CONEXION))
-                {
-                    CONEXION.Open();
-                    LECTOR = COMANDO.ExecuteReader();
-
-                    while (LECTOR.Read())
+                while (LECTOR.Read())
+                {                       
+                    estatusLista.Add(new Estatus
                     {
-
-                        Id = int.Parse(LECTOR["Id"].ToString());
-                        Estatus_Nombre = LECTOR["Estatus"].ToString();
-                    }
-                    CONEXION.Close();
-
-                    return this;
+                        Id = int.Parse(LECTOR["Id"].ToString()),
+                        Estatus_Nombre = LECTOR["Estatus"].ToString(),
+                    });
                 }
+
+                CONEXION.Close();
+                return estatusLista;
             }
             catch (SqlException e)
             {
@@ -75,7 +43,6 @@ namespace Prueba_Tecnica_ARS.Models
             {
                 throw new Exception(e.Message);
             }
-        }
-              
+        }              
     }
 }

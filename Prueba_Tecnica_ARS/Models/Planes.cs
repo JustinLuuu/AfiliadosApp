@@ -20,20 +20,17 @@ namespace Prueba_Tecnica_ARS.Models
         {
             try
             {
-                using (COMANDO = new SqlCommand("insert into Planes (Nombre, Monto_Cobertura, Fecha_Registro," +
-                    " Id_Estatus) " +
-                    " values (@nombre, @montoCobertura, @fechaRegistro, @idEstatus)", CONEXION))
-                {
-                    COMANDO.Parameters.AddWithValue("@nombre", Nombre.Trim());
-                    COMANDO.Parameters.AddWithValue("@montoCobertura", Monto_Cobertura);
-                    COMANDO.Parameters.AddWithValue("@fechaRegistro", DateTime.Today);
-                    COMANDO.Parameters.AddWithValue("@idEstatus", Id_Estatus);
+                COMANDO = new SqlCommand("insert into Planes (Nombre, Monto_Cobertura, Fecha_Registro," +
+                " Id_Estatus) " +
+                " values (@nombre, @montoCobertura, @fechaRegistro, @idEstatus)", CONEXION);
+                COMANDO.Parameters.AddWithValue("@nombre", Nombre.Trim());
+                COMANDO.Parameters.AddWithValue("@montoCobertura", Monto_Cobertura);
+                COMANDO.Parameters.AddWithValue("@fechaRegistro", DateTime.Today);
+                COMANDO.Parameters.AddWithValue("@idEstatus", Id_Estatus);
 
-                    CONEXION.Open();
-                    COMANDO.ExecuteNonQuery();
-                    CONEXION.Close();
-
-                }
+                CONEXION.Open();
+                COMANDO.ExecuteNonQuery();
+                CONEXION.Close();
             }
             catch (SqlException e)
             {
@@ -49,20 +46,17 @@ namespace Prueba_Tecnica_ARS.Models
         {
             try
             {
-                using (COMANDO = new SqlCommand("update Planes set Nombre=@nombre, Monto_Cobertura=@montoCobertura," +
-                    " Id_Estatus=@idEstatus where Id=@id", CONEXION))
-                {
-                    COMANDO.Parameters.AddWithValue("@nombre", Nombre.Trim());
-                    COMANDO.Parameters.AddWithValue("@montoCobertura", Monto_Cobertura);
-                    COMANDO.Parameters.AddWithValue("@idEstatus", Id_Estatus);
-                    COMANDO.Parameters.AddWithValue("@id", Id);
+                COMANDO = new SqlCommand("update Planes set Nombre=@nombre, Monto_Cobertura=@montoCobertura," +
+                    " Id_Estatus=@idEstatus where Id=@id", CONEXION);
 
+                COMANDO.Parameters.AddWithValue("@nombre", Nombre.Trim());
+                COMANDO.Parameters.AddWithValue("@montoCobertura", Monto_Cobertura);
+                COMANDO.Parameters.AddWithValue("@idEstatus", Id_Estatus);
+                COMANDO.Parameters.AddWithValue("@id", Id);
 
-                    CONEXION.Open();
-                    COMANDO.ExecuteNonQuery();
-                    CONEXION.Close();
-
-                }
+                CONEXION.Open();
+                COMANDO.ExecuteNonQuery();
+                CONEXION.Close();
             }
             catch (SqlException e)
             {
@@ -80,26 +74,24 @@ namespace Prueba_Tecnica_ARS.Models
 
             try
             {
-                using (COMANDO = new SqlCommand("select * from Planes", CONEXION))
-                {
-                    CONEXION.Open();
-                    LECTOR = COMANDO.ExecuteReader();
+                COMANDO = new SqlCommand("select * from Planes", CONEXION);
+                CONEXION.Open();
+                LECTOR = COMANDO.ExecuteReader();
 
-                    while (LECTOR.Read())
-                    {                       
-                        planesLista.Add(new Planes
-                        {
-                            Id = int.Parse(LECTOR["Id"].ToString()),
-                            Nombre = LECTOR["Nombre"].ToString(),
-                            Monto_Cobertura = decimal.Parse(LECTOR["Monto_Cobertura"].ToString()),
-                            Fecha_Registro = DateTime.Parse(LECTOR["Fecha_Registro"].ToString()),
-                            Id_Estatus = int.Parse(LECTOR["Id_Estatus"].ToString()),
-                        });
-                    }
-                    CONEXION.Close();
-
-                    return planesLista;
+                while (LECTOR.Read())
+                {                       
+                    planesLista.Add(new Planes
+                    {
+                        Id = int.Parse(LECTOR["Id"].ToString()),
+                        Nombre = LECTOR["Nombre"].ToString(),
+                        Monto_Cobertura = decimal.Parse(LECTOR["Monto_Cobertura"].ToString()),
+                        Fecha_Registro = DateTime.Parse(LECTOR["Fecha_Registro"].ToString()),
+                        Id_Estatus = int.Parse(LECTOR["Id_Estatus"].ToString()),
+                    });
                 }
+
+                CONEXION.Close();
+                return planesLista;
             }
             catch (SqlException e)
             {
@@ -115,23 +107,23 @@ namespace Prueba_Tecnica_ARS.Models
         {
             try
             {
-                using (COMANDO = new SqlCommand("select * from Planes where Id=@id", CONEXION))
-                {
-                    COMANDO.Parameters.AddWithValue("@id", id);
-                    CONEXION.Open();
-                    LECTOR = COMANDO.ExecuteReader();
+                COMANDO = new SqlCommand("select * from Planes where Id=@id", CONEXION);
+                COMANDO.Parameters.AddWithValue("@id", id);
 
-                    while (LECTOR.Read())
-                    {
-                        Id = int.Parse(LECTOR["Id"].ToString());
-                        Nombre = LECTOR["Nombre"].ToString();
-                        Monto_Cobertura = decimal.Parse(LECTOR["Monto_Cobertura"].ToString());
-                        Fecha_Registro = DateTime.Parse(LECTOR["Fecha_Registro"].ToString());
-                        Id_Estatus = int.Parse(LECTOR["Id_Estatus"].ToString());
-                    }
-                    CONEXION.Close();
-                    return this;
+                CONEXION.Open();
+                LECTOR = COMANDO.ExecuteReader();
+
+                while (LECTOR.Read())
+                {
+                    Id = int.Parse(LECTOR["Id"].ToString());
+                    Nombre = LECTOR["Nombre"].ToString();
+                    Monto_Cobertura = decimal.Parse(LECTOR["Monto_Cobertura"].ToString());
+                    Fecha_Registro = DateTime.Parse(LECTOR["Fecha_Registro"].ToString());
+                    Id_Estatus = int.Parse(LECTOR["Id_Estatus"].ToString());
                 }
+
+                CONEXION.Close();
+                return this;
             }
             catch (SqlException e)
             {
@@ -141,21 +133,6 @@ namespace Prueba_Tecnica_ARS.Models
             {
                 throw new Exception(e.Message);
             }
-        }
-
-
-        public void SwitchActivar(int id)
-        {
-            var planSwitch = ObtenerPlanPorId(id);
-            if (planSwitch.Id_Estatus == 1)
-            {
-                planSwitch.Id_Estatus = 2;
-            }
-            else
-            {
-                planSwitch.Id_Estatus = 1;
-            }
-            planSwitch.Actualizar();
-        }
+        }       
     }
 }

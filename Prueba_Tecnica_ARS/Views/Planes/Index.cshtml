@@ -43,13 +43,13 @@
                 <td>
                     @if (plan.Id_Estatus == 1)
                     {
-                        <a href="~/Planes/SwitchActivarPlan?idPlan=@plan.Id" class="text-white btn-danger p-1">
+                        <a href="~/Planes/CambiarEstatusPlan?idPlan=@plan.Id" class="text-white btn-danger p-1">
                             Inactivar
                         </a>
                     }
                     else
                     {
-                        <a href="~/Planes/SwitchActivarPlan?idPlan=@plan.Id" class="text-white btn-success p-1">
+                        <a href="~/Planes/CambiarEstatusPlan?idPlan=@plan.Id" class="text-white btn-success p-1">
                             Activar
                         </a>
                     }

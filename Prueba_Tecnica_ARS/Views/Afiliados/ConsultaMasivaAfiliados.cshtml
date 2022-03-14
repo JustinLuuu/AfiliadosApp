@@ -17,96 +17,45 @@
 
     @if (Model == null)
     {
-      <form action="ConsultaMasivaAfiliados" method="post">
-         <label for="nombres">Nombres</label>
-         <input for="nombres" class="form-control" type="text" />
+        <form action="ConsultaMasivaAfiliados" method="post">
+            <div class="mt-2">
+                <label>Nombres</label>
+                <input name="nombres" class="form-control" type="text" />
+            </div>
 
-         <label for="apellidos">Apellidos</label>
-         <input for="apellidos" class="form-control" type="text" />
+            <div class="mt-2">
+                <label>Apellidos</label>
+                <input name="apellidos" class="form-control" type="text" /> <br />
+            </div>
 
-         <label for="cedula">Cedula</label>
-         <input for="cedula" class="form-control" type="text" />
+            <div class="mt-2 mb-3">
+                <label>Cedula</label>
+                <input name="cedula" class="form-control" type="text" />
+            </div>
 
-         <button class="d-block m-auto btn btn-success w-50 mt-1" type="submit">
-             Filtrar
-         </button>     
-      </form>
+            <button class="d-block m-auto btn btn-success w-50" type="submit">
+                Filtrar
+            </button>
+        </form>
     }
     else if (Model.Count > 0)
     {
-        <table class="table table-dark mt-4 pt-2">
-            <thead>
-                <tr>
-                    <td>Id</td>
-                    <td>Nombre </td>
-                    <td>Apellido</td>
-                    <td>Fecha de Nacimiento</td>
-                    <td>Sexo</td>
-                    <td>Cedula</td>
-                    <td>Numero de Seguridad Social</td>
-                    <td>Fecha de Registro</td>
-                    <td>Monto Consumido</td>
-                    <td>Monto Cobertura</td>
-                    <td>Monto Restante</td>
-                    <td>Estatus</td>
-                    <td>Plan</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach (Afiliados afiliado in Model)
-                {
-                    <tr>
-                        <td>@afiliado.Id</td>
-                        <td>@afiliado.Nombres</td>
-                        <td>@afiliado.Apellidos</td>
-                        <td>@afiliado.Fecha_Nacimiento.ToString("yyyy-MM-dd")</td>
-                        <td>@afiliado.Sexo.ToString().ToUpper()</td>
-                        <td>@afiliado.Cedula</td>
-                        <td>@afiliado.Numero_Seguridad_Social</td>
-                        <td>@afiliado.Fecha_Registro.ToString("yyyy-MM-dd")</td>
-                        <td>$@afiliado.Monto_Consumido RD$</td>
-                        <td>@Planes.Find(p => p.Id == afiliado.Id_Plan).Monto_Cobertura RD$</td>
-                        <td>@(Planes.Find(p => p.Id == afiliado.Id_Plan).Monto_Cobertura - afiliado.Monto_Consumido )RD$ </td>
-
-                        <td>@Estatus.Find(e => e.Id == afiliado.Id_Estatus).Estatus_Nombre</td>
-                        <td>@Planes.Find(x => x.Id == afiliado.Id_Plan).Nombre</td>
-
-                        <td>
-                            <a href="~/Afiliados/ActualizarAfiliado?idAfiliado=@afiliado.Id"
-                               class="text-white btn-success p-1">
-                                Actualizar
-                            </a>
-                        </td>
-
-                        <td>
-                            @if (afiliado.Id_Estatus == 1)
-                            {
-                                <a href="~/Afiliados/SwitchActivarAfiliado?idAfiliado=@afiliado.Id" class="text-white btn-danger p-1">
-                                    Inactivar
-                                </a>
-                            }
-                            else
-                            {
-                                <a href="~/Afiliados/SwitchActivarAfiliado?idAfiliado=@afiliado.Id" class="text-white btn-success p-1">
-                                    Activar
-                                </a>
-                            }
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-
+        <partial name="~/Views/Shared/_AfiliadosTabla.cshtml" model="@Model" view-data="ViewData" />
     }
     else
     {
-        <h2>No coincidencias encontradas!</h2>
+        <h2 class="text-center p-5">¡No coincidencias encontradas!</h2>
+
     }
 
+    @if (Model != null || Model?.Count > 0)
+    {
+        <h3 class="text-center mt-2">
+            <a href="~/Afiliados/ConsultaMasivaAfiliados" class="text-white btn-success p-1">
+                Hacer una nueva busqueda
+            </a>
+        </h3>
+    }
 </section>
 
 
